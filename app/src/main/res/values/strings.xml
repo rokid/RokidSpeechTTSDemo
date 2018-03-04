@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">RokidSpeechTTSDemo</string>
+    <string name="title_activity_speech_demo">SpeechDemoActivity</string>
+</resources>
