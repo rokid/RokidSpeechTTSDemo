@@ -13,6 +13,8 @@ import com.rokid.speech.Tts;
 import com.rokid.speech.TtsCallback;
 import com.rokid.speech.TtsOptions;
 
+import org.greenrobot.eventbus.EventBus;
+
 /**
  * Created by siokagami on 2018/3/5.
  */
