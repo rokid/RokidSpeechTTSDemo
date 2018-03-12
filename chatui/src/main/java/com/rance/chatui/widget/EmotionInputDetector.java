@@ -23,7 +23,7 @@ import android.widget.TextView;
 
 import com.rance.chatui.R;
 import com.rance.chatui.enity.MessageInfo;
-import com.rance.chatui.util.AudioRecoderUtils;
+import com.rance.chatui.util.AudioRecorderUtils;
 import com.rance.chatui.util.PopupWindowFactory;
 import com.rance.chatui.util.Utils;
 
@@ -51,7 +51,7 @@ public class EmotionInputDetector {
     private View mAddButton;
     private Boolean isShowEmotion = false;
     private Boolean isShowAdd = false;
-    private AudioRecoderUtils mAudioRecoderUtils;
+    private AudioRecorderUtils mAudioRecorderUtils;
     private PopupWindowFactory mVoicePop;
     private TextView mPopVoiceText;
 
@@ -226,7 +226,7 @@ public class EmotionInputDetector {
                         mVoiceText.setText("松开结束");
                         mPopVoiceText.setText("手指上滑，取消发送");
                         mVoiceText.setTag("1");
-                        mAudioRecoderUtils.startRecord(mActivity);
+                        mAudioRecorderUtils.startRecord(mActivity);
                         break;
                     case MotionEvent.ACTION_MOVE:
                         if (wantToCancle(x, y)) {
@@ -243,10 +243,10 @@ public class EmotionInputDetector {
                         mVoicePop.dismiss();
                         if (mVoiceText.getTag().equals("2")) {
                             //取消录音（删除录音文件）
-                            mAudioRecoderUtils.cancelRecord();
+                            mAudioRecorderUtils.cancelRecord();
                         } else {
                             //结束录音（保存录音文件）
-                            mAudioRecoderUtils.stopRecord();
+                            mAudioRecorderUtils.stopRecord();
                         }
                         mVoiceText.setText("按住说话");
                         mVoiceText.setTag("3");
@@ -286,7 +286,7 @@ public class EmotionInputDetector {
         mActivity.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN |
                 WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         hideSoftInput();
-        mAudioRecoderUtils = new AudioRecoderUtils();
+        mAudioRecorderUtils = new AudioRecorderUtils();
 
         View view = View.inflate(mActivity, R.layout.layout_microphone, null);
         mVoicePop = new PopupWindowFactory(mActivity, view);
@@ -296,7 +296,7 @@ public class EmotionInputDetector {
         final TextView mTextView = (TextView) view.findViewById(R.id.tv_recording_time);
         mPopVoiceText = (TextView) view.findViewById(R.id.tv_recording_text);
         //录音回调
-        mAudioRecoderUtils.setOnAudioStatusUpdateListener(new AudioRecoderUtils.OnAudioStatusUpdateListener() {
+        mAudioRecorderUtils.setOnAudioStatusUpdateListener(new AudioRecorderUtils.OnAudioStatusUpdateListener() {
 
             //录音中....db为声音分贝，time为录音时长
             @Override

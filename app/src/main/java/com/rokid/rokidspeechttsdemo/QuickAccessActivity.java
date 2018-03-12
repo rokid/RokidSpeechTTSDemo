@@ -73,7 +73,6 @@ public class QuickAccessActivity extends AppCompatActivity {
     private ImageView animView;
 
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -176,7 +175,7 @@ public class QuickAccessActivity extends AppCompatActivity {
     };
 
     private void initSpeechCallback() {
-         speechCallback = new SpeechCallback() {
+        speechCallback = new SpeechCallback() {
             @Override
             public void onStart(int i) {
                 LogUtil.d("onStart " + i);
@@ -264,38 +263,8 @@ public class QuickAccessActivity extends AppCompatActivity {
     }
 
     private void voiceSpeechRequest(byte[] voiceByte) {
-        int speechId = speech.startVoice(new SpeechCallback() {
-            @Override
-            public void onStart(int i) {
-
-            }
-
-            @Override
-            public void onIntermediateResult(int i, String s, String s1) {
-
-            }
-
-            @Override
-            public void onAsrComplete(int i, String s) {
-
-            }
-
-            @Override
-            public void onComplete(int i, String s, String s1) {
-
-            }
-
-            @Override
-            public void onCancel(int i) {
-
-            }
-
-            @Override
-            public void onError(int i, int i1) {
-
-            }
-        });
-        speech.putVoice(speechId,voiceByte);
+        int speechId = speech.startVoice(speechCallback);
+        speech.putVoice(speechId, voiceByte);
         speech.endVoice(speechId);
     }
 
