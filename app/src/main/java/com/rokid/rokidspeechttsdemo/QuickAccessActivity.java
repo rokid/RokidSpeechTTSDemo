@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -193,6 +194,7 @@ public class QuickAccessActivity extends AppCompatActivity {
 
             @Override
             public void onComplete(int i, final String s, final String s1) {
+                LogUtil.d("onComplete" + s + " " + s1);
                 //需要在主线程更新ui
                 runOnUiThread(new Runnable() {
                     @Override
@@ -231,12 +233,14 @@ public class QuickAccessActivity extends AppCompatActivity {
         chatList.scrollToPosition(chatAdapter.getCount() - 1);
         messageInfo.setSendState(Constants.CHAT_ITEM_SEND_SUCCESS);
         chatAdapter.notifyDataSetChanged();
-        voiceSpeechRequest(FileUtil.file2Byte(messageInfo.getFilepath()));
+        if (messageInfo.getContent() != null ) {
+            textSpeechRequest(messageInfo.getContent());
+        } else {
+            voiceSpeechRequest(FileUtil.file2Byte(messageInfo.getFilepath()));
 
-//        if (messageInfo.getContent() == null && messageInfo.getContent().equals("")) {
-//        } else {
-//            textSpeechRequest(messageInfo.getContent());
-//        }
+        }
+
+
     }
 
     private void initSpeech() {
@@ -264,8 +268,11 @@ public class QuickAccessActivity extends AppCompatActivity {
 
     private void voiceSpeechRequest(byte[] voiceByte) {
         int speechId = speech.startVoice(speechCallback);
+        LogUtil.d("putVoice");
         speech.putVoice(speechId, voiceByte);
+        LogUtil.d("endVoice");
         speech.endVoice(speechId);
+        LogUtil.d("endVoiceFinish");
     }
 
 
