@@ -62,6 +62,7 @@ public class SpeechDemoActivity extends AppCompatActivity {
         prepareOptions.device_type_id = Prepare.ROKID_DEVICE_TYPE_ID;
         prepareOptions.secret = Prepare.ROKID_SECRET;
         prepareOptions.device_id = Prepare.ROKID_DEVICE_ID;
+        Speech.VoiceOptions voiceOptions = new Speech.VoiceOptions();
         speech.prepare(prepareOptions);
 
     }
