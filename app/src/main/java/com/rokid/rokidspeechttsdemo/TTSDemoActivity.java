@@ -24,6 +24,8 @@ public class TTSDemoActivity extends AppCompatActivity {
     private Tts tts;
     private EditText etText;
     private Button btnTestTts;
+    private OpusPlayer opusPlayer;
+
 
 
     @Override
@@ -48,6 +50,7 @@ public class TTSDemoActivity extends AppCompatActivity {
     private void initTTS() {
         // 创建tts实例并初始化
         tts = new Tts();
+        opusPlayer = new OpusPlayer();
         PrepareOptions popts = new PrepareOptions();
         popts.host = "apigwws.open.rokid.com";
         popts.port = 443;
@@ -84,7 +87,6 @@ public class TTSDemoActivity extends AppCompatActivity {
                     }
 
                     public void onVoice(int id, byte[] data) {
-                        OpusPlayer opusPlayer = new OpusPlayer();
                         opusPlayer.play(data);
                     }
 
