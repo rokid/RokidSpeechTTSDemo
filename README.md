@@ -1,10 +1,22 @@
-# 你好！开发者
+# Hello Developers
 
-这是Rokid SDK 语音识别以及合成服务部分的DEMO
+This demo is for Rokid TTS and Rokid Speech service.
 
-目前仅提供简单的集成示例，更多玩法请参阅[Rokid SDK 文档](https://rokid.github.io/rokid-vsvy-sdk-docs)
+More information please visit our document [website](https://rokid.github.io/rokid-vsvy-sdk-docs)
 
-如有更多问题欢迎提交ISSUE,我们会为广大开发者答疑解惑
+# Support
 
-注：SDK尚未发布，本DEMO尚在施工中
+Please do not send e-mail to me.Public technical discussion on github is preferred.
+
+# Environment
+
+IDE : Android Studio 2.3+
+
+Gradle Version : 3.0+
+
+# Special thanks
+
+### [ChatUI](https://github.com/Rance935/ChatUI)
+
+
 
