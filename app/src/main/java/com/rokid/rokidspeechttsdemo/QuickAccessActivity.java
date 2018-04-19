@@ -45,6 +45,7 @@ import java.util.List;
 
 /**
  * Created by siokagami on 2018/3/6.
+ *
  */
 
 public class QuickAccessActivity extends AppCompatActivity {
@@ -177,51 +178,57 @@ public class QuickAccessActivity extends AppCompatActivity {
 
     private void initSpeechCallback() {
         speechCallback = new SpeechCallback() {
-            @Override
             public void onStart(int i) {
-                LogUtil.d("onStart " + i);
+                LogUtil.d(getResources().getString(R.string.text_onStart, i));
             }
 
             @Override
             public void onIntermediateResult(int i, String s, String s1) {
-                LogUtil.d("onIntermediateResult " + i + " " + s + " " + s1);
+                LogUtil.d(getResources().getString(R.string.text_onIntermediateResult, i, s, s1));
             }
 
             @Override
             public void onAsrComplete(int i, String s) {
-                LogUtil.d("onAsrComplete " + i + " " + s);
+                LogUtil.d(getResources().getString(R.string.text_onAsrComplete, i, s));
             }
 
             @Override
             public void onComplete(int i, final String s, final String s1) {
-                LogUtil.d("onComplete" + s + " " + s1);
+                LogUtil.d(getResources().getString(R.string.text_onComplete, i, s, s1));
                 //需要在主线程更新ui
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        MessageInfo message = new MessageInfo();
-                        message.setContent(s);
-                        message.setType(Constants.CHAT_ITEM_TYPE_LEFT);
-                        message.setHeader("http://tupian.enterdesk.com/2014/mxy/11/2/1/12.jpg");
-                        messageInfos.add(message);
-                        chatAdapter.add(message);
-                        chatList.scrollToPosition(chatAdapter.getCount() - 1);
-                        chatAdapter.notifyDataSetChanged();
+                        //需要在主线程更新ui
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                MessageInfo message = new MessageInfo();
+                                message.setContent(s);
+                                message.setType(Constants.CHAT_ITEM_TYPE_LEFT);
+                                message.setHeader("http://tupian.enterdesk.com/2014/mxy/11/2/1/12.jpg");
+                                messageInfos.add(message);
+                                chatAdapter.add(message);
+                                chatList.scrollToPosition(chatAdapter.getCount() - 1);
+                                chatAdapter.notifyDataSetChanged();
+                            }
+                        });
                     }
                 });
             }
 
             @Override
             public void onCancel(int i) {
-                LogUtil.d("onCancel " + i);
+                LogUtil.d(getResources().getString(R.string.text_onCancel, i));
             }
 
             @Override
             public void onError(int i, int i1) {
-                LogUtil.d("onError " + i + " " + i1);
+                LogUtil.d(getResources().getString(R.string.text_onError, i, i1));
             }
         };
     }
+
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void MessageEventBus(final MessageInfo messageInfo) {
@@ -233,7 +240,7 @@ public class QuickAccessActivity extends AppCompatActivity {
         chatList.scrollToPosition(chatAdapter.getCount() - 1);
         messageInfo.setSendState(Constants.CHAT_ITEM_SEND_SUCCESS);
         chatAdapter.notifyDataSetChanged();
-        if (messageInfo.getContent() != null ) {
+        if (messageInfo.getContent() != null) {
             textSpeechRequest(messageInfo.getContent());
         } else {
             voiceSpeechRequest(FileUtil.file2Byte(messageInfo.getFilepath()));

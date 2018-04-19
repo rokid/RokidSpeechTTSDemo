@@ -3,17 +3,17 @@ package com.rokid.rokidspeechttsdemo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.rokid.rokidspeechttsdemo.utils.LogUtil;
 import com.rokid.speech.OpusPlayer;
 import com.rokid.speech.PrepareOptions;
 import com.rokid.speech.Tts;
 import com.rokid.speech.TtsCallback;
 import com.rokid.speech.TtsOptions;
-
-import org.greenrobot.eventbus.EventBus;
 
 /**
  * Created by siokagami on 2018/3/5.
@@ -24,6 +24,7 @@ public class TTSDemoActivity extends AppCompatActivity {
     private Tts tts;
     private EditText etText;
     private Button btnTestTts;
+    private OpusPlayer opusPlayer;
 
 
     @Override
@@ -37,6 +38,7 @@ public class TTSDemoActivity extends AppCompatActivity {
     private void initView() {
         etText = findViewById(R.id.et_text);
         btnTestTts = findViewById(R.id.btn_test_tts);
+        opusPlayer = new OpusPlayer();
         btnTestTts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,32 +77,32 @@ public class TTSDemoActivity extends AppCompatActivity {
                     // 在onVoice中得到语音数据，调用播放器播放
                     @Override
                     public void onStart(int i) {
-
+                        LogUtil.d(getResources().getString(R.string.text_onStart, i));
                     }
 
                     @Override
                     public void onText(int i, String s) {
-
+                        LogUtil.d(getResources().getString(R.string.text_onText, i, s));
                     }
 
                     public void onVoice(int id, byte[] data) {
-                        OpusPlayer opusPlayer = new OpusPlayer();
+                        LogUtil.d(getResources().getString(R.string.text_onVoice, id));
                         opusPlayer.play(data);
                     }
 
                     @Override
                     public void onCancel(int i) {
-
+                        LogUtil.d(getResources().getString(R.string.text_onCancel, i));
                     }
 
                     @Override
                     public void onComplete(int i) {
-
+                        LogUtil.d(getResources().getString(R.string.text_onTTSComplete, i));
                     }
 
                     @Override
                     public void onError(int i, int i1) {
-
+                        LogUtil.d(getResources().getString(R.string.text_onError, i, i1));
                     }
                 });
     }

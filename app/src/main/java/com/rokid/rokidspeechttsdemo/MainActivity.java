@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
-import com.rance.chatui.ui.activity.ChatUIActivity;
 
 /**
  * Created by siokagami on 2018/3/3.

@@ -3,6 +3,7 @@ package com.rokid.rokidspeechttsdemo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -71,22 +72,22 @@ public class SpeechDemoActivity extends AppCompatActivity {
         speech.putText(s, new SpeechCallback() {
             @Override
             public void onStart(int i) {
-                LogUtil.d("onStart " + i);
+                LogUtil.d(getResources().getString(R.string.text_onStart, i));
             }
 
             @Override
             public void onIntermediateResult(int i, String s, String s1) {
-                LogUtil.d("onIntermediateResult " + i + " " + s + " " + s1);
+                LogUtil.d(getResources().getString(R.string.text_onIntermediateResult, i, s, s1));
             }
 
             @Override
             public void onAsrComplete(int i, String s) {
-                LogUtil.d("onAsrComplete " + i + " " + s);
+                LogUtil.d(getResources().getString(R.string.text_onAsrComplete, i, s));
             }
 
             @Override
             public void onComplete(int i, final String s, final String s1) {
-                LogUtil.d("onComplete " + s + " " + s1);
+                LogUtil.d(getResources().getString(R.string.text_onComplete, i, s,s1));
                 //需要在主线程更新ui
                 runOnUiThread(new Runnable() {
                     @Override
@@ -101,12 +102,12 @@ public class SpeechDemoActivity extends AppCompatActivity {
 
             @Override
             public void onCancel(int i) {
-                LogUtil.d("onCancel " + i);
+                LogUtil.d(getResources().getString(R.string.text_onCancel,i));
             }
 
             @Override
             public void onError(int i, int i1) {
-                LogUtil.d("onError " + i + " " + i1);
+                LogUtil.d(getResources().getString(R.string.text_onError, i, i1));
             }
         });
     }

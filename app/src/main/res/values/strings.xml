@@ -1,4 +1,13 @@
 <resources>
     <string name="app_name">RokidSpeechTTSDemo</string>
     <string name="title_activity_speech_demo">SpeechDemoActivity</string>
+    <string name="text_onStart">onStart id=%d</string>
+    <string name="text_onIntermediateResult">onIntermediateResult id =%d asrResult=%s extraResult=%s</string>
+    <string name="text_onAsrComplete">onAsrComplete id =%d asrResult=%s</string>
+    <string name="text_onComplete">onComplete id =%d nlpResult=%s intent=%s</string>
+    <string name="text_onCancel">onCancel id =%d</string>
+    <string name="text_onError">onError id=%d errCode=%d</string>
+    <string name="text_onText">onText id=%d text=%s</string>
+    <string name="text_onVoice">onVoice id=%d</string>
+    <string name="text_onTTSComplete">onComplete id=%d</string>
 </resources>
