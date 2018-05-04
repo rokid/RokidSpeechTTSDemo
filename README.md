@@ -2,7 +2,7 @@
 
 This demo is for Rokid TTS and Rokid Speech service.
 
-More information please visit our document [website](https://rokid.github.io/rokid-vsvy-sdk-docs)
+More information please visit our document [website](https://rokid.github.io/rokid-vsvy-sdk-docs/tutorials/example3/intro.html)
 
 # Support
 
